@@ -42,6 +42,16 @@
   <ItemGroup>
     <Compile Include="Enums\DeliveryMethod.cs" />
     <Compile Include="Enums\ProductCategory.cs" />
+    <Compile Include="Interfaces\ICustomerContext.cs" />
+    <Compile Include="Interfaces\IOrderContext.cs" />
+    <Compile Include="Interfaces\IPizzaContext.cs" />
+    <Compile Include="Interfaces\IPizzacrustContext.cs" />
+    <Compile Include="Interfaces\IProductContext.cs" />
+    <Compile Include="Logic\CustomerRepository.cs" />
+    <Compile Include="Logic\OrderRepository.cs" />
+    <Compile Include="Logic\PizzacrustRepository.cs" />
+    <Compile Include="Logic\PizzaRepository.cs" />
+    <Compile Include="Logic\ProductRepository.cs" />
     <Compile Include="Models\Adress.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Order.cs" />
@@ -52,8 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Logic\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
