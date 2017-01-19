@@ -64,6 +64,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.tpProducts = new System.Windows.Forms.TabPage();
+            this.btEditProduct = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btAddProduct = new System.Windows.Forms.Button();
             this.cbCategorie = new System.Windows.Forms.ComboBox();
@@ -96,7 +97,7 @@
             this.cbCrust = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
             this.lbPizza = new System.Windows.Forms.ListBox();
-            this.btEditProduct = new System.Windows.Forms.Button();
+            this.btEditCustomer = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpCustomers.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -128,6 +129,7 @@
             // 
             // tpCustomers
             // 
+            this.tpCustomers.Controls.Add(this.btEditCustomer);
             this.tpCustomers.Controls.Add(this.label8);
             this.tpCustomers.Controls.Add(this.lbCustomers);
             this.tpCustomers.Controls.Add(this.groupBox1);
@@ -142,7 +144,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(371, 21);
+            this.label8.Location = new System.Drawing.Point(497, 30);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(56, 13);
             this.label8.TabIndex = 15;
@@ -151,7 +153,7 @@
             // lbCustomers
             // 
             this.lbCustomers.FormattingEnabled = true;
-            this.lbCustomers.Location = new System.Drawing.Point(374, 60);
+            this.lbCustomers.Location = new System.Drawing.Point(500, 69);
             this.lbCustomers.Name = "lbCustomers";
             this.lbCustomers.Size = new System.Drawing.Size(181, 238);
             this.lbCustomers.TabIndex = 1;
@@ -460,6 +462,16 @@
             this.tpProducts.Text = "Products";
             this.tpProducts.UseVisualStyleBackColor = true;
             // 
+            // btEditProduct
+            // 
+            this.btEditProduct.Location = new System.Drawing.Point(186, 287);
+            this.btEditProduct.Name = "btEditProduct";
+            this.btEditProduct.Size = new System.Drawing.Size(75, 23);
+            this.btEditProduct.TabIndex = 3;
+            this.btEditProduct.Text = "Edit";
+            this.btEditProduct.UseVisualStyleBackColor = true;
+            this.btEditProduct.Click += new System.EventHandler(this.btEditProduct_Click);
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.btAddProduct);
@@ -765,15 +777,15 @@
             this.lbPizza.Size = new System.Drawing.Size(152, 251);
             this.lbPizza.TabIndex = 0;
             // 
-            // btEditProduct
+            // btEditCustomer
             // 
-            this.btEditProduct.Location = new System.Drawing.Point(186, 287);
-            this.btEditProduct.Name = "btEditProduct";
-            this.btEditProduct.Size = new System.Drawing.Size(75, 23);
-            this.btEditProduct.TabIndex = 3;
-            this.btEditProduct.Text = "Edit";
-            this.btEditProduct.UseVisualStyleBackColor = true;
-            this.btEditProduct.Click += new System.EventHandler(this.btEditProduct_Click);
+            this.btEditCustomer.Location = new System.Drawing.Point(345, 278);
+            this.btEditCustomer.Name = "btEditCustomer";
+            this.btEditCustomer.Size = new System.Drawing.Size(75, 23);
+            this.btEditCustomer.TabIndex = 16;
+            this.btEditCustomer.Text = "Edit";
+            this.btEditCustomer.UseVisualStyleBackColor = true;
+            this.btEditCustomer.Click += new System.EventHandler(this.btEditCustomer_Click);
             // 
             // Form1
             // 
@@ -880,6 +892,7 @@
         private System.Windows.Forms.ListBox lbPizza;
         private System.Windows.Forms.Button btAddPizza;
         private System.Windows.Forms.Button btEditProduct;
+        private System.Windows.Forms.Button btEditCustomer;
     }
 }
 

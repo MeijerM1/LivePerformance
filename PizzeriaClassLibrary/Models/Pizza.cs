@@ -62,7 +62,10 @@ namespace PizzeriaClassLibrary.Models
 
         public decimal CalculatePrice()
         {
-            throw new NotImplementedException();
+            if (Shape == "Round")
+            {
+                
+            }
         }
 
         public void PlaceInOven(DateTime time)

@@ -12,6 +12,8 @@ namespace PizzeriaClassLibrary.Interfaces
 
         void AddCustomer(Customer customer);
 
+        void UpdateCustomer(Customer customer);
+
         void DeleteCustomer(Customer customer);
 
         int AddAdress(Adress adress);

@@ -45,10 +45,15 @@ namespace PizzeriaClassLibrary.Models
             _customerRepo.AddCustomer(this);
         }
 
+        public void UpdateCustomer()
+        {
+            _customerRepo.UpdateCustomer(this);
+        }
+
         /// <inheritdoc />
         public override string ToString()
         {
-            return FirstName + "" +  LastName;
+            return FirstName + " " +  LastName;
         }
     }
 }

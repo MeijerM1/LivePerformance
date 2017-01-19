@@ -43,6 +43,28 @@ namespace PizzeriaClassLibrary.Data
             }
         }
 
+        public void UpdateCustomer(Customer customer)
+        {
+            UpdateAdress(customer.Adress);
+
+            var QueryString = "UPDATE Customer SET LastName=@lastName, FirstName=@firstName, Email=@email, Phonenumber=@phoneNumber WHERE ID = @id";
+            using (var conn = new SqlConnection(_connectionString))
+            {
+
+                using (var cmd = new SqlCommand(QueryString, conn))
+                {
+                    conn.Open();
+                    cmd.Parameters.AddWithValue("lastName", customer.LastName);
+                    cmd.Parameters.AddWithValue("firstName", customer.FirstName);
+                    cmd.Parameters.AddWithValue("email", customer.Email);
+                    cmd.Parameters.AddWithValue("phoneNumber", customer.Phonenumber);
+                    cmd.Parameters.AddWithValue("ID", customer.ID);
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+        }
+
         /// <inheritdoc />
         public void DeleteCustomer(Customer customer)
         {
@@ -52,7 +74,8 @@ namespace PizzeriaClassLibrary.Data
         /// <inheritdoc />
         public int AddAdress(Adress adress)
         {
-            var QueryString = "INSERT INTO Adress (Streetname, HouseNumber, Postalcode) VALUES (@streetName, @houseNumber, @postalCode)";
+            var QueryString =
+                "INSERT INTO Adress (Streetname, HouseNumber, Postalcode) VALUES (@streetName, @houseNumber, @postalCode)";
             using (var conn = new SqlConnection(_connectionString))
             {
 
@@ -65,6 +88,7 @@ namespace PizzeriaClassLibrary.Data
                     cmd.ExecuteNonQuery();
                 }
             }
+       
 
             var IdqueryString = "SELECT MAX(ID) as ID FROM Adress";
             using (var conn = new SqlConnection(_connectionString))
@@ -83,10 +107,29 @@ namespace PizzeriaClassLibrary.Data
             return -1;
         }
 
+        public void UpdateAdress(Adress adress)
+        {
+            var QueryString =
+                "UPDATE Adress  SET Streetname=@streetName, HouseNumber=@houseNumber, Postalcode=@postalCode WHERE ID = @id";
+            using (var conn = new SqlConnection(_connectionString))
+            {
+
+                using (var cmd = new SqlCommand(QueryString, conn))
+                {
+                    conn.Open();
+                    cmd.Parameters.AddWithValue("streetName", adress.Streetname);
+                    cmd.Parameters.AddWithValue("houseNumber", adress.HouseNumber);
+                    cmd.Parameters.AddWithValue("postalCode", adress.Postalcode);
+                    cmd.Parameters.AddWithValue("id", adress.ID);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         /// <inheritdoc />
         public List<Customer> GetAllCustomers()
         {
-            var QueryString = "SELECT c.ID, c.LastName, c.FirstName, c.Email, c.PhoneNumber, a.ID, a.Streetname, a.HouseNumber, a.PostalCode FROM Customer c JOIN Adress a on a.ID = c.AdressID ";
+            var QueryString = "SELECT c.ID, c.LastName, c.FirstName, c.Email, c.PhoneNumber, a.ID as adressId, a.Streetname, a.HouseNumber, a.PostalCode FROM Customer c JOIN Adress a on a.ID = c.AdressID ";
             var result = new List<Customer>();
             using (var conn = new SqlConnection(_connectionString))
             {
@@ -113,7 +156,7 @@ namespace PizzeriaClassLibrary.Data
         private Customer CreateCustomerFromReader(SqlDataReader reader)
         {
             Adress adress = new Adress(
-                Convert.ToInt32(reader["ID"]),
+                Convert.ToInt32(reader["adressId"]),
                 Convert.ToString(reader["Streetname"]),
                 Convert.ToInt32(reader["HouseNumber"]),
                 Convert.ToString(reader["PostalCode"]));

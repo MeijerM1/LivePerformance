@@ -22,6 +22,11 @@ namespace PizzeriaClassLibrary.Logic
             _context.AddCustomer(customer);
         }
 
+        public void UpdateCustomer(Customer customer)
+        {
+            _context.UpdateCustomer(customer);
+        }
+
         /// <inheritdoc />
         public void DeleteCustomer(Customer customer)
         {

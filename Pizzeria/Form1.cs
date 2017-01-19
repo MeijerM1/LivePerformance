@@ -1,39 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using PizzeriaClassLibrary.Enums;
-using PizzeriaClassLibrary.Models;
-using PizzeriaClassLibrary.Logic;
 using PizzeriaClassLibrary.Data;
+using PizzeriaClassLibrary.Enums;
+using PizzeriaClassLibrary.Logic;
+using PizzeriaClassLibrary.Models;
 
 namespace Pizzeria
 {
     public partial class Form1 : Form
     {
-        ProductRepository _productRepo = new ProductRepository(new ProductMsSqlContext());
-        CustomerRepository _customerRepo = new CustomerRepository(new CustomerMsSqlContext());
+        private readonly CustomerRepository _customerRepo = new CustomerRepository(new CustomerMsSqlContext());
+        private readonly ProductRepository _productRepo = new ProductRepository(new ProductMsSqlContext());
 
         public Form1()
         {
             InitializeComponent();
+            UpdateCustomerControls();
         }
 
         private void btAddProduct_Click(object sender, EventArgs e)
         {
             if (lbProducts.SelectedIndex < 0)
-            {
                 AddProduct();
-            }
             else
-            {
                 UpdateProduct();
-            }
 
             MessageBox.Show("Done");
         }
@@ -43,32 +34,27 @@ namespace Pizzeria
         {
             cbCategorie.Items.Clear();
             foreach (var item in Enum.GetValues(typeof(ProductCategory)))
-            {
                 cbCategorie.Items.Add(item);
-            }
 
             lbProducts.Items.Clear();
-            List<Product> products = _productRepo.GetAllProducts();
+            var products = _productRepo.GetAllProducts();
             foreach (var product in products)
-            {
                 lbProducts.Items.Add(product);
-            }
         }
 
+        // Fill the customer tab with data
         private void UpdateCustomerControls()
         {
             lbCustomers.Items.Clear();
-            List<Customer> customers = _customerRepo.GetAllCustomers();
+            var customers = _customerRepo.GetAllCustomers();
 
             foreach (var customer in customers)
-            {
                 lbCustomers.Items.Add(customer);
-            }
         }
-
-        // TODO Make content only load for right page
+        
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Only load data for the selected page for performance
             var index = tabControl1.SelectedIndex;
             switch (index)
             {
@@ -85,7 +71,6 @@ namespace Pizzeria
                     // TODO
                     break;
             }
-            UpdateProductControle();
         }
 
         private void btEditProduct_Click(object sender, EventArgs e)
@@ -96,7 +81,7 @@ namespace Pizzeria
                 return;
             }
 
-            Product productToEdit = (Product)lbProducts.SelectedItem;
+            var productToEdit = (Product) lbProducts.SelectedItem;
             ShowProductDetails(productToEdit);
         }
 
@@ -111,46 +96,108 @@ namespace Pizzeria
 
         private void AddProduct()
         {
-            string name = tbName.Text;
-            string description = tbDescription.Text;
-            decimal purchaPrice = nudPurchasePrice.Value;
-            decimal sellPrice = nudSellPrice.Value;
-            ProductCategory category = (ProductCategory)Enum.Parse(typeof(ProductCategory), cbCategorie.Text);
+            var name = tbName.Text;
+            var description = tbDescription.Text;
+            var purchaPrice = nudPurchasePrice.Value;
+            var sellPrice = nudSellPrice.Value;
+            var category = (ProductCategory) Enum.Parse(typeof(ProductCategory), cbCategorie.Text);
 
-            Product productToAdd = new Product(name, description, purchaPrice, sellPrice, category);
+            var productToAdd = new Product(name, description, purchaPrice, sellPrice, category);
             productToAdd.AddToDatabase();
-
-            
         }
 
         private void UpdateProduct()
         {
-            Product productToEdit = (Product)lbProducts.SelectedItem;
+            var productToEdit = (Product) lbProducts.SelectedItem;
 
             productToEdit.Name = tbName.Text;
             productToEdit.Description = tbDescription.Text;
             productToEdit.PurchasePrice = nudPurchasePrice.Value;
             productToEdit.SellPrice = nudSellPrice.Value;
-            productToEdit.ProductCategory = (ProductCategory)Enum.Parse(typeof(ProductCategory), cbCategorie.Text);
+            productToEdit.ProductCategory = (ProductCategory) Enum.Parse(typeof(ProductCategory), cbCategorie.Text);
 
-            productToEdit.UpdateProducts();     
+            productToEdit.UpdateProducts();
         }
 
         private void btSave_Click(object sender, EventArgs e)
         {
-            string lastName = tbLastName.Text;
-            string firstName = tbFirstName.Text;
-            string email = tbEmail.Text;
-            int phoneNumber = Convert.ToInt32(tbPhone.Text);
+            if (lbCustomers.SelectedIndex < 0)
+            {
+                AddNewCustomer();
+            }
+            else
+            {
+                UpdateCustomer();
+            }
 
-            string street = tbStreet.Text;
-            int houseNumber = Convert.ToInt32(tbHouseNumber.Text);
-            string postal = tbPostal.Text;
+            MessageBox.Show("Done");
+        }
 
-            Adress adress = new Adress(street, houseNumber, postal);
+        private void AddNewCustomer()
+        {
+            var textBoxes = groupBox1.Controls.OfType<TextBox>();
+            foreach (TextBox tb in textBoxes)
+            {
+                if (tb.Text == "")
+                {
+                    MessageBox.Show("One or more fields are empty");
+                    return;
+                }
+            }
 
-            Customer customerToAdd = new Customer(lastName, firstName, email, phoneNumber, adress);
+            var lastName = tbLastName.Text;
+            var firstName = tbFirstName.Text;
+            var email = tbEmail.Text;
+            var phoneNumber = Convert.ToInt32(tbPhone.Text);
+
+            var street = tbStreet.Text;
+            var houseNumber = Convert.ToInt32(tbHouseNumber.Text);
+            var postal = tbPostal.Text;
+
+            var adress = new Adress(street, houseNumber, postal);
+
+            var customerToAdd = new Customer(lastName, firstName, email, phoneNumber, adress);
             customerToAdd.AddToDatabase();
+        }
+
+        private void UpdateCustomer()
+        {
+            Customer customerToEdit = (Customer) lbCustomers.SelectedItem;
+            customerToEdit.LastName = tbLastName.Text;
+            customerToEdit.FirstName = tbFirstName.Text;
+            customerToEdit.Email = tbEmail.Text;
+            customerToEdit.Phonenumber = Convert.ToInt32(tbPhone.Text);            
+
+            customerToEdit.Adress.Streetname = tbStreet.Text;
+            customerToEdit.Adress.HouseNumber = Convert.ToInt32(tbHouseNumber.Text);
+            customerToEdit.Adress.Postalcode = tbPostal.Text;
+
+            customerToEdit.UpdateCustomer();
+
+        }
+
+        private void ShowCustomerDetails(Customer customerToEdit)
+        {
+            tbLastName.Text = customerToEdit.LastName;
+            tbFirstName.Text = customerToEdit.FirstName;
+            tbEmail.Text = customerToEdit.Email;
+            tbPhone.Text = customerToEdit.Phonenumber.ToString();
+
+            tbStreet.Text = customerToEdit.Adress.Streetname;
+            tbHouseNumber.Text = customerToEdit.Adress.HouseNumber.ToString();
+            tbPostal.Text = customerToEdit.Adress.Postalcode;
+        }
+
+        private void btEditCustomer_Click(object sender, EventArgs e)
+        {
+            if (lbCustomers.SelectedIndex < 0)
+            {
+                MessageBox.Show("Select a customer first");
+                return;
+            }
+
+            var customerToEdit = (Customer)lbCustomers.SelectedItem;
+            ShowCustomerDetails(customerToEdit);
         }
     }
 }
