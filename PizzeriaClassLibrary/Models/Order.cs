@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,32 +49,65 @@ namespace PizzeriaClassLibrary.Models
 
         public void AddProduct(Product product)
         {
-            throw new NotImplementedException();
+            Products.Add(product);
         }
 
         public void RemoveProduct(Product product)
         {
-            throw new NotImplementedException();
+            Products.Remove(product);
         }
 
         public void AddPizza(Pizza pizza)
         {
-            throw new NotImplementedException();
+           Pizzas.Add(pizza);
         }
 
         public void RemovePizza(Pizza pizza)
         {
-            throw new NotImplementedException();
+            Pizzas.Remove(pizza);
         }
 
         public decimal CalculatePrice()
         {
-            throw new NotImplementedException();
+            decimal pizzaPrice = 0;
+
+            foreach (var pizza in Pizzas)
+            {
+                pizzaPrice += pizza.CalculateTotalPrice();
+            }
+
+            decimal productPrice = 0;
+            foreach (var product in Products)
+            {
+                productPrice += product.SellPrice;
+            }
+
+            return (pizzaPrice + (productPrice/100));
         }
 
-        public bool ExportTicket()
+        public bool ExportTicket(string fileName)
         {
-            throw new NotImplementedException();
+            using (StreamWriter sw = new StreamWriter(fileName))
+            {
+                sw.WriteLine("Pizzeria La Crosta Isapore");
+                sw.WriteLine("Klantbon voor : " + this.Buyer.ToString());
+
+                foreach (var pizza in Pizzas)
+                {
+                    sw.WriteLine(pizza.Name + "    " + pizza.CalculateTotalPrice());
+                }
+
+                foreach (var product in Products)
+                {
+                    sw.WriteLine(product.Name + "    " + product.SellPrice);
+                }
+
+                sw.WriteLine("Prijs exclusief BTW: " + ((CalculatePrice() / 106) * 100));
+                sw.WriteLine("BTW bedrag: " + ((CalculatePrice() / 106) * 6));
+                sw.WriteLine("Te betalen bedrag: " + CalculatePrice());
+
+                return true;
+            }
         }
     }
 }

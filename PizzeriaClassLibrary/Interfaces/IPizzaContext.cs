@@ -18,5 +18,7 @@ namespace PizzeriaClassLibrary.Interfaces
         List<Pizza> GetAllPizzas();
 
         Pizza GetPizzaById(int id);
+
+        void PutInOven(Pizza pizza, DateTime dateTime);
     }
 }

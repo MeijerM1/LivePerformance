@@ -27,5 +27,11 @@ namespace PizzeriaClassLibrary.Models
             Description = description;
             PricePerCentimeter = pricePerCentimeter;
         }
+
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return Description;
+        }
     }
 }

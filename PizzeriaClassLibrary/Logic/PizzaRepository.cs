@@ -46,5 +46,11 @@ namespace PizzeriaClassLibrary.Logic
         {
             return _context.GetPizzaById(id);
         }
+
+        /// <inheritdoc />
+        public void PutInOven(Pizza pizza, DateTime dateTime)
+        {
+            _context.PutInOven(pizza, dateTime);
+        }
     }
 }

@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpCustomers = new System.Windows.Forms.TabPage();
+            this.btEditCustomer = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.lbCustomers = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -97,7 +98,8 @@
             this.cbCrust = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
             this.lbPizza = new System.Windows.Forms.ListBox();
-            this.btEditCustomer = new System.Windows.Forms.Button();
+            this.tbPizzaName = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tpCustomers.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -140,6 +142,16 @@
             this.tpCustomers.TabIndex = 0;
             this.tpCustomers.Text = "Customers";
             this.tpCustomers.UseVisualStyleBackColor = true;
+            // 
+            // btEditCustomer
+            // 
+            this.btEditCustomer.Location = new System.Drawing.Point(345, 278);
+            this.btEditCustomer.Name = "btEditCustomer";
+            this.btEditCustomer.Size = new System.Drawing.Size(75, 23);
+            this.btEditCustomer.TabIndex = 16;
+            this.btEditCustomer.Text = "Edit";
+            this.btEditCustomer.UseVisualStyleBackColor = true;
+            this.btEditCustomer.Click += new System.EventHandler(this.btEditCustomer_Click);
             // 
             // label8
             // 
@@ -354,6 +366,7 @@
             this.btAddNewPizza.TabIndex = 9;
             this.btAddNewPizza.Text = "Custom pizza";
             this.btAddNewPizza.UseVisualStyleBackColor = true;
+            this.btAddNewPizza.Click += new System.EventHandler(this.btAddNewPizza_Click);
             // 
             // label13
             // 
@@ -414,6 +427,7 @@
             this.btAddCustomer.TabIndex = 2;
             this.btAddCustomer.Text = "Add new customer";
             this.btAddCustomer.UseVisualStyleBackColor = true;
+            this.btAddCustomer.Click += new System.EventHandler(this.btAddCustomer_Click);
             // 
             // cbCustomer
             // 
@@ -626,6 +640,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label26);
+            this.groupBox4.Controls.Add(this.tbPizzaName);
             this.groupBox4.Controls.Add(this.btAddPizza);
             this.groupBox4.Controls.Add(this.label25);
             this.groupBox4.Controls.Add(this.clbToppings);
@@ -655,6 +671,7 @@
             this.btAddPizza.TabIndex = 17;
             this.btAddPizza.Text = "Add pizza";
             this.btAddPizza.UseVisualStyleBackColor = true;
+            this.btAddPizza.Click += new System.EventHandler(this.btAddPizza_Click);
             // 
             // label25
             // 
@@ -725,6 +742,7 @@
             this.nudValue1.Name = "nudValue1";
             this.nudValue1.Size = new System.Drawing.Size(120, 20);
             this.nudValue1.TabIndex = 8;
+            this.nudValue1.ValueChanged += new System.EventHandler(this.nudValue1_ValueChanged);
             // 
             // cbShape
             // 
@@ -733,6 +751,7 @@
             this.cbShape.Name = "cbShape";
             this.cbShape.Size = new System.Drawing.Size(121, 21);
             this.cbShape.TabIndex = 7;
+            this.cbShape.SelectedIndexChanged += new System.EventHandler(this.cbShape_SelectedIndexChanged);
             // 
             // label22
             // 
@@ -772,20 +791,27 @@
             // lbPizza
             // 
             this.lbPizza.FormattingEnabled = true;
+            this.lbPizza.HorizontalScrollbar = true;
             this.lbPizza.Location = new System.Drawing.Point(24, 66);
             this.lbPizza.Name = "lbPizza";
             this.lbPizza.Size = new System.Drawing.Size(152, 251);
             this.lbPizza.TabIndex = 0;
             // 
-            // btEditCustomer
+            // tbPizzaName
             // 
-            this.btEditCustomer.Location = new System.Drawing.Point(345, 278);
-            this.btEditCustomer.Name = "btEditCustomer";
-            this.btEditCustomer.Size = new System.Drawing.Size(75, 23);
-            this.btEditCustomer.TabIndex = 16;
-            this.btEditCustomer.Text = "Edit";
-            this.btEditCustomer.UseVisualStyleBackColor = true;
-            this.btEditCustomer.Click += new System.EventHandler(this.btEditCustomer_Click);
+            this.tbPizzaName.Location = new System.Drawing.Point(112, 19);
+            this.tbPizzaName.Name = "tbPizzaName";
+            this.tbPizzaName.Size = new System.Drawing.Size(120, 20);
+            this.tbPizzaName.TabIndex = 18;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(20, 26);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(38, 13);
+            this.label26.TabIndex = 19;
+            this.label26.Text = "Name:";
             // 
             // Form1
             // 
@@ -893,6 +919,8 @@
         private System.Windows.Forms.Button btAddPizza;
         private System.Windows.Forms.Button btEditProduct;
         private System.Windows.Forms.Button btEditCustomer;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox tbPizzaName;
     }
 }
 

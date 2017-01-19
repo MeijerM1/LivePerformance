@@ -42,6 +42,9 @@
   <ItemGroup>
     <Compile Include="Data\Connection.cs" />
     <Compile Include="Data\CustomerMsSqlContext.cs" />
+    <Compile Include="Data\OrderMsSqlContext.cs" />
+    <Compile Include="Data\PizzacrustMsSqlContext.cs" />
+    <Compile Include="Data\PizzaMsSqlContext.cs" />
     <Compile Include="Data\ProductMsSqlContext.cs" />
     <Compile Include="Enums\DeliveryMethod.cs" />
     <Compile Include="Enums\ProductCategory.cs" />

@@ -41,17 +41,12 @@ namespace PizzeriaClassLibrary.Models
             ProductCategory = productCategory;
         }
 
-        public void ChangePrice(decimal price)
-        {
-            throw new NotImplementedException();
-        }
-
         public void AddToDatabase()
         {
             _productRepo.Addproduct(this);
         }
 
-        public void UpdateProducts()
+        public void UpdateProduct()
         {
             _productRepo.UpdateProduct(this);
         }
@@ -59,7 +54,7 @@ namespace PizzeriaClassLibrary.Models
         /// <inheritdoc />
         public override string ToString()
         {
-            return Name + " - " +  ProductCategory;
+            return Name;
         }
     }
 }
