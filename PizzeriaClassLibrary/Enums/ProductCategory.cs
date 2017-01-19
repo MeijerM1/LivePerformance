@@ -11,6 +11,7 @@ namespace PizzeriaClassLibrary.Enums
         Topping,
         Drink,
         AlcoholicDrink,
-        Sellable
+        Sellable,
+        NonSellable
     }
 }

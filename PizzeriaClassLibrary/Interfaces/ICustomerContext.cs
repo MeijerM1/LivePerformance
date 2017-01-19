@@ -7,14 +7,14 @@ using PizzeriaClassLibrary.Models;
 
 namespace PizzeriaClassLibrary.Interfaces
 {
-    interface ICustomerContext
+    public interface ICustomerContext
     {
 
         void AddCustomer(Customer customer);
 
         void DeleteCustomer(Customer customer);
 
-        void AddAdress(Adress adress);
+        int AddAdress(Adress adress);
 
         List<Customer> GetAllCustomers();
 

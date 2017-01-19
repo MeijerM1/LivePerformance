@@ -8,7 +8,7 @@ using PizzeriaClassLibrary.Models;
 
 namespace PizzeriaClassLibrary.Logic
 {
-    class PizzacrustRepository : IPizzacrustContext
+    public class PizzacrustRepository : IPizzacrustContext
     {
 
         private IPizzacrustContext _context;

@@ -8,11 +8,11 @@ using PizzeriaClassLibrary.Models;
 
 namespace PizzeriaClassLibrary.Logic
 {
-    class CustomerRepository : ICustomerContext
+    public class CustomerRepository : ICustomerContext
     {
         private ICustomerContext _context;
 
-        CustomerRepository(ICustomerContext context)
+        public CustomerRepository(ICustomerContext context)
         {
             _context = context;
         }
@@ -29,9 +29,9 @@ namespace PizzeriaClassLibrary.Logic
         }
 
         /// <inheritdoc />
-        public void AddAdress(Adress adress)
+        public int AddAdress(Adress adress)
         {
-            _context.AddAdress(adress);
+          return  _context.AddAdress(adress);
         }
 
         /// <inheritdoc />

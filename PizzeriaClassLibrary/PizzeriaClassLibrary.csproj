@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Connection.cs" />
+    <Compile Include="Data\CustomerMsSqlContext.cs" />
+    <Compile Include="Data\ProductMsSqlContext.cs" />
     <Compile Include="Enums\DeliveryMethod.cs" />
     <Compile Include="Enums\ProductCategory.cs" />
     <Compile Include="Interfaces\ICustomerContext.cs" />
@@ -60,9 +63,7 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

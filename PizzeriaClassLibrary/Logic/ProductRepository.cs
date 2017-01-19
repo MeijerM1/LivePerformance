@@ -8,7 +8,7 @@ using PizzeriaClassLibrary.Models;
 
 namespace PizzeriaClassLibrary.Logic
 {
-    class ProductRepository : IProductContext
+    public class ProductRepository : IProductContext
     {
         private IProductContext _context;
 

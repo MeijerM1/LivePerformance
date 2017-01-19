@@ -7,7 +7,7 @@ using PizzeriaClassLibrary.Models;
 
 namespace PizzeriaClassLibrary.Interfaces
 {
-    interface IOrderContext
+    public interface IOrderContext
     {
         void AddOrder(Order order);
 

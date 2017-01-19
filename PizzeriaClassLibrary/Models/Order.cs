@@ -8,7 +8,7 @@ using PizzeriaClassLibrary.Enums;
 
 namespace PizzeriaClassLibrary.Models
 {
-    class Order
+    public class Order
     {
         public int ID { get; set; }
         public DateTime TimeOfPlacement { get; set; }

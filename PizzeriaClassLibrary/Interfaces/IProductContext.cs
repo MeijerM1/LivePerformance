@@ -7,7 +7,7 @@ using PizzeriaClassLibrary.Models;
 
 namespace PizzeriaClassLibrary.Interfaces
 {
-    interface IProductContext
+    public interface IProductContext
     {
         void Addproduct(Product product);
 

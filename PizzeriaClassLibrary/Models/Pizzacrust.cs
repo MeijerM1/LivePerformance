@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PizzeriaClassLibrary.Models
 {
-    class Pizzacrust
+    public class Pizzacrust
     {
         public int ID { get; set; }
         public string Description { get; set; }

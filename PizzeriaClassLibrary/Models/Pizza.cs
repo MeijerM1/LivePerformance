@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace PizzeriaClassLibrary.Models
 {
-    class Pizza
+    public class Pizza
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -52,12 +52,12 @@ namespace PizzeriaClassLibrary.Models
 
         public void AddTopping(Product product)
         {
-            throw new NotImplementedException();
+           Products.Add(product);
         }
 
         public void RemoveTopping(Product product)
         {
-            throw new NotImplementedException();
+            Products.Remove(product);
         }
 
         public decimal CalculatePrice()
