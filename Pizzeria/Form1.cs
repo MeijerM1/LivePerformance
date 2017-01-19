@@ -13,9 +13,9 @@ namespace Pizzeria
     public partial class Form1 : Form
     {
         private readonly CustomerRepository _customerRepo = new CustomerRepository(new CustomerMsSqlContext());
-        private readonly ProductRepository _productRepo = new ProductRepository(new ProductMsSqlContext());
-        private readonly PizzaRepository _pizzaRepo = new PizzaRepository(new PizzaMsSqlContext());
         private readonly PizzacrustRepository _pizzacrustRepo = new PizzacrustRepository(new PizzacrustMsSqlContext());
+        private readonly PizzaRepository _pizzaRepo = new PizzaRepository(new PizzaMsSqlContext());
+        private readonly ProductRepository _productRepo = new ProductRepository(new ProductMsSqlContext());
 
         public Form1()
         {
@@ -25,26 +25,20 @@ namespace Pizzeria
 
         private void btAddProduct_Click(object sender, EventArgs e)
         {
-           var textBoxes = groupBox3.Controls.OfType<TextBox>();
-            foreach (TextBox tb in textBoxes)
-            {
+            var textBoxes = groupBox3.Controls.OfType<TextBox>();
+            foreach (var tb in textBoxes)
                 if (tb.Text == "")
                 {
                     MessageBox.Show("One or more fields are empty");
                     return;
                 }
-            }
 
             try
             {
                 if (lbProducts.SelectedIndex < 0)
-                {
                     AddProduct();
-                }
                 else
-                {
                     UpdateProduct();
-                }
             }
             catch (SqlException exc)
             {
@@ -54,8 +48,6 @@ namespace Pizzeria
             {
                 MessageBox.Show(exc1.Message);
             }
-
-
         }
 
         // Fill the product tab with data
@@ -63,9 +55,7 @@ namespace Pizzeria
         {
             cbCategorie.Items.Clear();
             foreach (var item in Enum.GetValues(typeof(ProductCategory)))
-            {
                 cbCategorie.Items.Add(item);
-            }
 
             lbProducts.Items.Clear();
             var products = _productRepo.GetAllProducts();
@@ -89,16 +79,12 @@ namespace Pizzeria
             lbPizza.Items.Clear();
             var pizzas = _pizzaRepo.GetAllPizzas();
             foreach (var pizza in pizzas)
-            {
                 lbPizza.Items.Add(pizza);
-            }
 
             cbCrust.Items.Clear();
             var crusts = _pizzacrustRepo.GetAllPizzaCrusts();
             foreach (var pizzacrust in crusts)
-            {
                 cbCrust.Items.Add(pizzacrust);
-            }
             cbShape.Items.Clear();
             cbShape.Items.Add("Round");
             cbShape.Items.Add("Square");
@@ -108,9 +94,7 @@ namespace Pizzeria
             var allProducts = _productRepo.GetAllProducts();
             var topping = allProducts.Where(a => a.ProductCategory == ProductCategory.Topping);
             foreach (var product in topping)
-            {
                 clbToppings.Items.Add(product);
-            }
         }
 
         // Fill the order tab with data
@@ -119,30 +103,26 @@ namespace Pizzeria
             cbCustomer.Items.Clear();
             var customers = _customerRepo.GetAllCustomers();
             foreach (var c in customers)
-            {
                 cbCustomer.Items.Add(c);
-            }
 
             cbDeliveryMethod.Items.Clear();
             foreach (var item in Enum.GetValues(typeof(DeliveryMethod)))
-            {
                 cbDeliveryMethod.Items.Add(item);
-            }
 
             clbPizza.Items.Clear();
             var pizzas = _pizzaRepo.GetAllPizzas();
             foreach (var pizza in pizzas)
-            {
                 clbPizza.Items.Add(pizza);
-            }
 
             clbProduct.Items.Clear();
             var allProducts = _productRepo.GetAllProducts();
-            var sellables = allProducts.Where(a => a.ProductCategory == ProductCategory.AlcoholicDrink || a.ProductCategory == ProductCategory.Drink || a.ProductCategory == ProductCategory.Sellable);
+            var sellables =
+                allProducts.Where(
+                    a =>
+                        (a.ProductCategory == ProductCategory.AlcoholicDrink) ||
+                        (a.ProductCategory == ProductCategory.Drink) || (a.ProductCategory == ProductCategory.Sellable));
             foreach (var sellable in sellables)
-            {
                 clbProduct.Items.Add(sellable);
-            }
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -221,13 +201,9 @@ namespace Pizzeria
             try
             {
                 if (lbCustomers.SelectedIndex < 0)
-                {
                     AddNewCustomer();
-                }
                 else
-                {
                     UpdateCustomer();
-                }
             }
             catch (SqlException exc)
             {
@@ -246,14 +222,12 @@ namespace Pizzeria
         private void AddNewCustomer()
         {
             var textBoxes = groupBox1.Controls.OfType<TextBox>();
-            foreach (TextBox tb in textBoxes)
-            {
+            foreach (var tb in textBoxes)
                 if (tb.Text == "")
                 {
                     MessageBox.Show("One or more fields are empty");
                     return;
                 }
-            }
 
             var lastName = tbLastName.Text;
             var firstName = tbFirstName.Text;
@@ -274,7 +248,7 @@ namespace Pizzeria
 
         private void UpdateCustomer()
         {
-            Customer customerToEdit = (Customer) lbCustomers.SelectedItem;
+            var customerToEdit = (Customer) lbCustomers.SelectedItem;
             customerToEdit.LastName = tbLastName.Text;
             customerToEdit.FirstName = tbFirstName.Text;
             customerToEdit.Email = tbEmail.Text;
@@ -325,27 +299,24 @@ namespace Pizzeria
             }
             catch (Exception exc)
             {
-
                 MessageBox.Show(exc.Message);
             }
         }
 
         private void AddPizza()
         {
-            Pizzacrust crust = (Pizzacrust)cbCrust.SelectedItem;
-            string shape = cbShape.Text;
-            string name = tbPizzaName.Text;
-            List<Product> toppings = new List<Product>();
-            int size1 = Convert.ToInt32(nudValue1.Value);
-            int size2 = Convert.ToInt32(nudValue2.Value);
-            int size3 = Convert.ToInt32(nudValue3.Value);
+            var crust = (Pizzacrust) cbCrust.SelectedItem;
+            var shape = cbShape.Text;
+            var name = tbPizzaName.Text;
+            var toppings = new List<Product>();
+            var size1 = Convert.ToInt32(nudValue1.Value);
+            var size2 = Convert.ToInt32(nudValue2.Value);
+            var size3 = Convert.ToInt32(nudValue3.Value);
 
             foreach (var selected in clbToppings.CheckedItems)
-            {
-                toppings.Add((Product)selected);
-            }
+                toppings.Add((Product) selected);
 
-            Pizza pizzaToAdd = new Pizza(name, false, DateTime.Now, shape, size1, size2, size3, toppings, crust);
+            var pizzaToAdd = new Pizza(name, false, DateTime.Now, shape, size1, size2, size3, toppings, crust);
             pizzaToAdd.AddToDatabse();
 
             MessageBox.Show("Done");
@@ -363,7 +334,6 @@ namespace Pizzeria
 
         private void nudValue1_ValueChanged(object sender, EventArgs e)
         {
-
         }
 
         private void cbShape_SelectedIndexChanged(object sender, EventArgs e)
